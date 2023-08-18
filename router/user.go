@@ -1,10 +1,10 @@
 package router
 
 import (
-	"Leilei-platform/middleware"
-	"net/http"
-	"github.com/gin-gonic/gin"
 	"Leilei-platform/api/v1/system"
+	"Leilei-platform/middleware"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func SystemRouter() *gin.Engine {
@@ -26,6 +26,11 @@ func SystemRouter() *gin.Engine {
 		vv.POST("/update/info", system.UpdateInfo)
 		vv.GET("/all", system.UserAll)
 
+	}
+	vvv := r.Group("autotest/role")
+	{
+		vvv.GET("/list", system.GetRoleAll)
+		vvv.GET("/user/list", system.GetRoleUser)
 	}
 	//r.POST("/login", system.Login)
 	v2 := r.Group("/api/v1")

@@ -1,14 +1,14 @@
 package database
 
 import (
+	"Leilei-platform/model"
+	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 	"gorm.io/plugin/dbresolver"
 	"time"
-	"fmt"
-	"Leilei-platform/model"
 )
 
 var (
@@ -51,7 +51,7 @@ func InitMysql(read, writer string) {
 		},
 		Policy: dbresolver.RandomPolicy{},
 	}))
-	err = db.AutoMigrate(&model.User{}, &model.Project{}, &model.Role{})
+	err = db.AutoMigrate(&model.User{}, &model.Project{}, &model.Role{}, &model.UserRole{})
 	if err != nil {
 		fmt.Println("自动创建表结构失败：", err)
 		return
