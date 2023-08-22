@@ -51,7 +51,14 @@ func InitMysql(read, writer string) {
 		},
 		Policy: dbresolver.RandomPolicy{},
 	}))
-	err = db.AutoMigrate(&model.User{}, &model.Project{}, &model.Role{}, &model.UserRole{})
+	err = db.AutoMigrate(
+		&model.User{},
+		&model.Project{},
+		&model.Role{},
+		&model.UserRole{},
+		&model.Permission{},
+		&model.RolePermission{},
+		&model.UserProject{})
 	if err != nil {
 		fmt.Println("自动创建表结构失败：", err)
 		return

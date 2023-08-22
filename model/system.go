@@ -43,7 +43,7 @@ func (Role) TableName() string {
 }
 
 type Permission struct {
-	ID   int64  `json:"id" gorm:"primarykey"` // 主键ID
+	ID   string `json:"id"` //
 	Name string `json:"name" gorm:"comment:权限名称"`
 }
 

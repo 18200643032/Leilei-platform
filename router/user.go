@@ -17,20 +17,27 @@ func SystemRouter() *gin.Engine {
 	{
 		v.POST("/register", system.Register)
 		v.POST("/login", system.Login)
+
 	}
-	vv := r.Group("/autotest/user")
+	systemRouter := r.Group("/autotest/user")
+	systemRouter.Use(middleware.AuthMiddleware())
 	{
-		vv.GET("/info/:id", system.GetUserInfo)
-		vv.POST("/switch/project", system.SwitchProject)
-		vv.POST("/update/password", system.UpdatePassword)
-		vv.POST("/update/info", system.UpdateInfo)
-		vv.GET("/all", system.UserAll)
+		systemRouter.GET("/info/:id", system.GetUserInfo)
+		systemRouter.POST("/switch/project", system.SwitchProject)
+		systemRouter.POST("/update/password", system.UpdatePassword)
+		systemRouter.POST("/update/info", system.UpdateInfo)
+		systemRouter.GET("/all", system.UserAll)
 
 	}
 	vvv := r.Group("autotest/role")
 	{
 		vvv.GET("/list", system.GetRoleAll)
 		vvv.GET("/user/list", system.GetRoleUser)
+	}
+	vvvv := r.Group("autotest")
+	{
+		vvvv.GET("menu/list", system.GetMenu)
+		vvvv.GET("/project/user/:id", system.ProjectUser)
 	}
 	//r.POST("/login", system.Login)
 	v2 := r.Group("/api/v1")
